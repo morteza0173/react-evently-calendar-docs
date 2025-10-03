@@ -63,6 +63,9 @@ const CustomRenderDayCalander = () => {
       classNames={{
         month: "not-prose m-0 p-0",
         year: "not-prose m-0 p-0",
+        weekdays: "not-prose !text-[0.6rem] md:!text-xs",
+        weekday: "not-prose ",
+        days: "not-prose !text-[0.6rem] md:!text-xs",
       }}
       dir="rtl"
       components={{

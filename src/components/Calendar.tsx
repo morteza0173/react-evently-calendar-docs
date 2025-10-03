@@ -7,7 +7,7 @@ const Calendar = () => {
   return (
     <EventlyCalendar
       classNames={{
-        root: "min-w-[320px] !w-full",
+        root: "!min-w-[320px] !w-full",
         month: "not-prose m-0 p-0",
         year: "not-prose m-0 p-0",
         weekdays: "not-prose !text-[0.6rem] md:!text-xs",

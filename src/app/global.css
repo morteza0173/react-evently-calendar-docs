@@ -9,3 +9,7 @@
 #nd-toc {
   display: none !important;
 }
+
+.calendar-app {
+  min-width: 320px !important;
+}
