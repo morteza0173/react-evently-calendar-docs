@@ -1,71 +1,10 @@
----
-title: Introduction
-description: React Calendar component supporting Jalali and Gregorian, with full customization.
-order: 1
----
-
-# Calendar Component
-
-The `Calendar` component is a flexible React calendar that supports both **Gregorian** and **Jalali** calendars.
-It allows full customization via **props**, **classNames**, and **components**.
-
-```npm
-npm i react-evently-calendar
-```
-
-import Calendar from "@/components/Calendar.tsx";
-
-## examples
-
-This is a simple example of how to use the calendar with the default style.
-
-import { Calendar as EventlyCalendar } from "react-evently-calendar";
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">preview</TabsTrigger>
-    <TabsTrigger value="code">code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview">
-    <Calendar />
-  </TabsContent>
-   <TabsContent value="code">
-   ```tsx lineNumbers
-   "use client";
-
-import { Calendar as EventlyCalendar } from "react-evently-calendar";
-
-const Calendar = () => {
-return (
-
-<EventlyCalendar />
-); }; export default Calendar;
-
-````
-</TabsContent>
-</Tabs>
-
-But this style is quite plain, so the option is provided for users to customize it however they want.
-
-import CustomRenderDayCalander from "@/components/CustomRenderDayCalander.tsx";
-
-
-<Tabs defaultValue="preview">
-  <TabsList>
-    <TabsTrigger value="preview">preview</TabsTrigger>
-    <TabsTrigger value="code">code</TabsTrigger>
-  </TabsList>
-  <TabsContent value="preview">
-    <CustomRenderDayCalander />
-  </TabsContent>
-   <TabsContent value="code">
-   ```tsx lineNumbers
-  "use client";
+"use client";
 
 import dayjs from "dayjs";
 import { Calendar } from "react-evently-calendar";
 import jalali from "jalali-plugin-dayjs";
 import { useEffect, useRef, useState } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 dayjs.extend(jalali);
 
@@ -121,7 +60,29 @@ const CustomRenderDayCalander = () => {
     <Calendar
       CalendarType="jalali"
       firstDayOfWeek={6}
+      classNames={{
+        month: "not-prose m-0 p-0",
+        year: "not-prose m-0 p-0",
+      }}
       dir="rtl"
+      components={{
+        NextButton: (props) => (
+          <button
+            {...props}
+            className="bg-blue-200 border-0 py-1.5 px-3.5 cursor-pointer rounded-sm transition-colors hover:bg-blue-300"
+          >
+            <ChevronLeft color="black" size={16} />
+          </button>
+        ),
+        PrevButton: (props) => (
+          <button
+            {...props}
+            className="bg-blue-200 border-0 py-1.5 px-3.5 cursor-pointer rounded-sm transition-colors hover:bg-blue-300"
+          >
+            <ChevronRight color="black" size={16} />
+          </button>
+        ),
+      }}
       renderDay={(
         day,
         date,
@@ -182,11 +143,3 @@ const CustomRenderDayCalander = () => {
   );
 };
 export default CustomRenderDayCalander;
-
-
-````
-
-</TabsContent>
-</Tabs>
-
-Thanks to the `renderDay` prop, you have the ability to implement anything you can imagine.

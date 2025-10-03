@@ -1,0 +1,25 @@
+---
+title: Calendar Components
+order: 3
+---
+
+# Customizing Navigation Buttons
+
+You can provide your own `PrevButton` and `NextButton` components using the `components` prop:
+
+```tsx
+<Calendar
+  components={{
+    PrevButton: ({ onClick }) => (
+      <button onClick={onClick} className="bg-red-500 text-white p-2 rounded">
+        Prev
+      </button>
+    ),
+    NextButton: ({ onClick }) => (
+      <button onClick={onClick} className="bg-green-500 text-white p-2 rounded">
+        Next
+      </button>
+    ),
+  }}
+/>
+```
