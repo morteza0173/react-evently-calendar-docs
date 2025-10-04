@@ -13,3 +13,49 @@
 .calendar-app {
   min-width: 320px !important;
 }
+
+html[dir="rtl"] [role="tablist"] {
+  justify-content: flex-end !important;
+}
+
+html[dir="rtl"] #nd-sidebar button[aria-label="Toggle Theme"] {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+html[dir="rtl"] #nd-sidebar {
+  margin-right: 0;
+  margin-left: auto;
+  text-align: right;
+}
+
+html[dir="rtl"] #nd-sidebar,
+html[dir="rtl"] #nd-sidebar * {
+  text-align: right;
+}
+
+html[dir="rtl"] #nd-sidebar a {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+html[dir="rtl"] #nd-sidebar [data-state] > a {
+  flex-direction: row; /* خود parent LTR */
+  text-align: left;
+}
+
+html[dir="rtl"] #nd-sidebar [data-state] a {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+
+html[dir="rtl"] #nd-sidebar [data-state] a svg.ms-auto {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+html[dir="rtl"] #nd-sidebar div:first-child > div.flex > a {
+  margin-right: 0;
+  margin-left: auto;
+  flex-direction: row;
+}

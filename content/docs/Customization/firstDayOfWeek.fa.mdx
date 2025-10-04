@@ -1,0 +1,27 @@
+---
+title: firstDayOfWeek پراپ
+order: 4
+---
+
+
+پراپ `firstDayOfWeek` مشخص می‌کند که اولین روز هفته در تقویم شما کدام روز باشد. این پراپ عددی است که روزهای هفته را از 0 تا 6 نشان می‌دهد، که 0 برای یکشنبه، 1 برای دوشنبه، و به همین ترتیب تا 6 برای شنبه است.
+
+### مثال:
+
+```tsx
+import React from "react";
+import Calendar from "react-evently-calendar";
+
+const App = () => {
+  return (
+    <div>
+      {/* هفته از شنبه شروع شود */}
+      <Calendar firstDayOfWeek={6} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+پیش فرض بر روی 6 که شنبه است قرار دارد 

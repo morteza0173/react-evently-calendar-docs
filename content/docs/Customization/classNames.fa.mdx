@@ -1,0 +1,57 @@
+---
+title: ClassNames پراپ
+---
+
+# شخصی سازی استایل ها با استفاده از `ClassNames`
+
+می‌توانید کلاس‌های CSS پیش‌فرض را با استفاده از پراپ classNames بازنویسی کنید.
+استایل های پیش فرض را میتوانید از این [لینک](https://github.com/morteza0173/react-evently-calendar/blob/main/src/components/Calendar/Calendar.css) مشاهده کنید
+
+| کلید         | توضیحات                            |
+| ------------ | ---------------------------------- |
+| `root`       | کانتینر اصلی                       |
+| `header`     | هدر تقویم                          |
+| `nav`        | کانتینر ناوبری (ماه/سال + دکمه‌ها) |
+| `month`      | متن ماه                            |
+| `year`       | متن سال                            |
+| `weekdays`   | کانتینر روزهای هفته                |
+| `weekday`    | هر برچسب روز هفته                  |
+| `days`       | کانتینر روزها                      |
+| `day`        | هر روز                             |
+| `currentDay` | برجسته‌سازی روز جاری               |
+| `lastMonth`  | روزهای ماه قبل                     |
+| `nextMonth`  | روزهای ماه بعد                     |
+
+توجه داشته باشید که برای بازنویسی (override) استایل‌ها در Tailwind باید از `!` و در CSS از `!important` استفاده کنید.
+
+import CalendarClassNameProps from "@/components/CalendarClassNamesProps.tsx";
+
+<Tabs defaultValue="preview" >
+  <TabsList>
+    <TabsTrigger value="preview">پیش نمایش</TabsTrigger>
+    <TabsTrigger value="code">نمونه کد</TabsTrigger>
+  </TabsList>
+  <TabsContent dir="rtl" value="preview">
+    به عنوان مثال حذف پس زمینه و بوردر‌های کانتینر روز‌های هفته و همچنین رسپانسیو سایز متن روز های هفته
+    <CalendarClassNameProps />
+  </TabsContent>
+   <TabsContent value="code">
+   ```tsx lineNumbers
+   "use client";
+
+import { Calendar as EventlyCalendar } from "react-evently-calendar";
+
+const Calendar = () => {
+return (
+
+<EventlyCalendar
+  classNames={{
+    weekdays: "!text-[0.6rem] md:!text-xs !border-0 !bg-transparent",
+    weekday: "!border-0",
+  }}
+/>
+); }; export default Calendar;
+
+```
+</TabsContent>
+</Tabs>
