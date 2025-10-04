@@ -1,0 +1,26 @@
+---
+title: components پراپ
+order: 3
+---
+
+# شخصی‌سازی دکمه‌های ناوبری (ماه قبل و بعد)
+
+شما میتوانید کامپوننت دکمه های `ماه بعد` و `ماه قبل` خودتون رو بسازید و به پراپ `components` پاس دهید
+
+```tsx
+<Calendar
+  components={{
+    PrevButton: ({ onClick , dir }) => (
+      <button onClick={onClick} className="bg-red-500 text-white p-2 rounded">
+        Prev
+      </button>
+    ),
+    NextButton: ({ onClick , dir}) => (
+      <button onClick={onClick} className="bg-green-500 text-white p-2 rounded">
+        Next
+      </button>
+    ),
+  }}
+/>
+```
+

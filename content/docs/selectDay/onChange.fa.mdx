@@ -1,0 +1,31 @@
+---
+title: onChange پراپ
+---
+
+پراپ `onChange` یک تابع کال‌بک است که وقتی کاربر یک روز را در تقویم انتخاب می‌کند، اجرا می‌شود. این تابع تاریخ انتخاب شده (`Date`) را دریافت می‌کند و می‌توانید از آن برای به‌روزرسانی وضعیت (state) یا ارسال تاریخ به بخش‌های دیگر برنامه استفاده کنید.
+
+### مثال:
+
+```tsx lineNumbers
+import React, { useState } from "react";
+import Calendar from "react-evently-calendar";
+
+const App = () => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  return (
+    <div>
+      <Calendar onChange={(date) => setSelectedDate(date)} />
+      {selectedDate && (
+        <p>تاریخ انتخاب شده: {selectedDate.toLocaleDateString()}</p>
+      )}
+    </div>
+  );
+};
+
+export default App;
+```
+
+## نکته ی مهم
+
+اگر از پراپ `renderDay` استفاده میکنید حتما بخش نکته‌ی مهم در انتخاب روز [این صفحه](/fa/docs/Customization/renderDay#%D9%86%DA%A9%D8%AA%D9%87%DB%8C-%D9%85%D9%87%D9%85-%D8%AF%D8%B1-%D8%A7%D9%86%D8%AA%D8%AE%D8%A7%D8%A8-%D8%B1%D9%88%D8%B2) را مطالعه کنید

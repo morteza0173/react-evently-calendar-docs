@@ -1,0 +1,191 @@
+---
+title: معرفی کتابخانه
+description: کامپوننت تقویم ری‌اکت که از تقویم‌های جلالی و میلادی پشتیبانی می‌کند و امکان سفارشی‌سازی کامل شامل استایل‌ها، رندر روزها و رویدادها را دارد.
+order: 1
+---
+
+# نصب کتابخانه
+
+برای نصب کامپوننت، کافی است دستور زیر را در پروژه React خود اجرا کنید:
+
+```npm
+ npm i react-evently-calendar
+```
+
+import Calendar from "@/components/Calendar.tsx";
+
+## مثال ها
+
+این یک مثال ساده از کامپوننت با استایل پیش فرض است
+
+import { Calendar as EventlyCalendar } from "react-evently-calendar";
+
+<Tabs defaultValue="preview" >
+  <TabsList>
+    <TabsTrigger value="preview">پیش نمایش</TabsTrigger>
+    <TabsTrigger value="code">نمونه کد</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <Calendar />
+  </TabsContent>
+   <TabsContent value="code">
+   ```tsx lineNumbers
+   "use client";
+
+import { Calendar as EventlyCalendar } from "react-evently-calendar";
+
+const Calendar = () => {
+return (
+
+<EventlyCalendar />
+); }; export default Calendar;
+
+````
+</TabsContent>
+</Tabs>
+
+این استایل پایه‌ای و ساده است، اما با پراپ‌های فراهم شده می‌توانید آن را به هر شکلی که می‌خواهید شخصی‌سازی کنید.
+
+import CustomRenderDayCalander from "@/components/CustomRenderDayCalander.tsx";
+
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">پیش نمایش</TabsTrigger>
+    <TabsTrigger value="code">نمونه کد</TabsTrigger>
+  </TabsList>
+  <TabsContent value="preview">
+    <CustomRenderDayCalander />
+  </TabsContent>
+   <TabsContent value="code">
+   ```tsx lineNumbers
+  "use client";
+
+import dayjs from "dayjs";
+import { Calendar } from "react-evently-calendar";
+import jalali from "jalali-plugin-dayjs";
+import { useEffect, useRef, useState } from "react";
+
+dayjs.extend(jalali);
+
+export const monthsFa = [
+  "فروردین",
+  "اردیبهشت",
+  "خرداد",
+  "تیر",
+  "مرداد",
+  "شهریور",
+  "مهر",
+  "آبان",
+  "آذر",
+  "دی",
+  "بهمن",
+  "اسفند",
+];
+
+const events = [
+  {
+    id: 1,
+    title: "جلسه تیم",
+    date: dayjs().add(1, "day").toDate(),
+  },
+  {
+    id: 2,
+    title: "ملاقات مشتری",
+    date: dayjs().add(5, "day").toDate(),
+  },
+];
+
+const CustomRenderDayCalander = () => {
+  const dayRefs = useRef<Record<string, HTMLDivElement | null>>({});
+
+  const [hiddenEvents, setHiddenEvents] = useState<Record<string, boolean>>({});
+
+  const checkWidths = () => {
+    const newHidden: Record<string, boolean> = {};
+    Object.entries(dayRefs.current).forEach(([key, el]) => {
+      if (!el) return;
+      newHidden[key] = el.offsetWidth < 90;
+    });
+    setHiddenEvents(newHidden);
+  };
+
+  useEffect(() => {
+    checkWidths();
+    window.addEventListener("resize", checkWidths);
+    return () => window.removeEventListener("resize", checkWidths);
+  }, []);
+
+  return (
+    <Calendar
+      CalendarType="jalali"
+      firstDayOfWeek={6}
+      dir="rtl"
+      renderDay={(
+        day,
+        date,
+        isCurrentMonth,
+        showMonth,
+        isToday,
+        CustomOnSelect
+      ) => {
+        const dayEvents = events.filter((event) =>
+          dayjs(event.date).isSame(dayjs(date), "day")
+        );
+
+        const dayKey = dayjs(date).format("YYYY-MM-DD");
+
+        return (
+          <div
+            ref={(el) => {
+              dayRefs.current[dayKey] = el;
+            }}
+            key={dayKey}
+            className={`
+    text-start p-0.5 aspect-[3/2] m-0.25 rounded-lg cursor-pointer text-[0.8rem] overflow-hidden
+    ${
+      isToday
+        ? "bg-[#8f8f8fff] dark:bg-[#3385ff] text-black dark:text-white"
+        : isCurrentMonth
+        ? "bg-[#c9c9c9ff] dark:bg-[#96bbf8] text-white font-bold"
+        : "bg-[#ebebebff] dark:bg-[#838383] text-black dark:text-gray-300 font-normal"
+    }
+  `}
+            onClick={() => CustomOnSelect()}
+          >
+            <div className="flex flex-row gap-0.5 flex-wrap">
+              <span>
+                {day}
+                {showMonth
+                  ? monthsFa[dayjs(date).calendar("jalali").month()]
+                  : null}
+              </span>
+              {dayEvents.length > 0 &&
+                (hiddenEvents[dayKey] ? (
+                  <div className="w-2 h-2 bg-amber-400 rounded-full m-2 mr-auto" />
+                ) : (
+                  dayEvents.map((event) => (
+                    <div
+                      key={event.id}
+                      className="w-full p-[1px] text-[0.7rem] bg-[#ecececff] dark:bg-[#2a2a2a] rounded-[0.4rem] text-black dark:text-gray-200"
+                    >
+                      {event.title}
+                    </div>
+                  ))
+                ))}
+            </div>
+          </div>
+        );
+      }}
+    />
+  );
+};
+export default CustomRenderDayCalander;
+
+
+````
+
+</TabsContent>
+</Tabs>
+
+با تشکر از پراپ `renderDay` میتوانید به هر شکلی که میخواهید تقویم خود را شخصی سازی کنید . میتونید برای مطالعه بیشتر در مورد `renderDay` [اینجا](/fa/docs/Customization/renderDay) کلیک کنید
