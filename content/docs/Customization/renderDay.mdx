@@ -1,5 +1,57 @@
 ---
-title: "renderDay"
+title: "renderDay Prop"
 order: 3
 ---
-# renderDay
+
+The `renderDay` prop allows you to **customize the rendering of each day cell in the calendar**.
+
+Using this prop, you can change the appearance of each day according to your needs — for example, adding custom styles, icons, or extra information inside each day cell.
+
+### Example
+
+```tsx lineNumbers
+<Calendar
+  renderDay={(day, date, isCurrentMonth, showMonth, isToday, onSelect) => (
+    <span
+      style={{
+        fontWeight: isToday ? "bold" : "normal",
+        color: isCurrentMonth ? "black" : "gray",
+      }}
+      onClick={onSelect}
+    >
+      {day}
+    </span>
+  )}
+/>
+```
+
+The `renderDay` prop provides **full control over the appearance of each day in the calendar**.
+It accepts a function that gives you the following information for each day:
+
+| Parameter        | Type         | Description                                                                                       |
+| ---------------- | ------------ | ------------------------------------------------------------------------------------------------- |
+| `day`            | `number`     | The day number of the month (e.g., 1, 2, 3 ...)                                                   |
+| `date`           | `Date`       | The JavaScript `Date` object for the current day                                                  |
+| `isCurrentMonth` | `boolean`    | Whether this day belongs to the current month or comes from the previous/next month               |
+| `showMonth`      | `boolean`    | Whether the month name should be displayed next to the day (usually for the first day of a month) |
+| `isToday`        | `boolean`    | Whether this day represents today                                                                 |
+| `onSelect`       | `() => void` | A function that is called when the day is selected                                                |
+
+## ⚠️ Important: Handling Day Selection
+
+Note: To ensure that day selection is properly registered in the calendar,
+you **must** attach the `onSelect` prop to the `onClick` event of the day element you create.
+This ensures that the calendar component’s `onChange` prop is triggered correctly.
+
+```tsx lineNumbers
+<Calendar
+  renderDay={(day, date, isCurrentMonth, showMonth, isToday, onSelect) => (
+    <span
+      className={isToday ? "today" : ""}
+      onClick={onSelect} // <- Make sure to call onSelect here // [!code highlight]
+    >
+      {day}
+    </span>
+  )}
+/>
+```

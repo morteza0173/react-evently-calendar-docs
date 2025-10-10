@@ -1,3 +1,32 @@
 ---
-title: onChange 
+title: onChange Prop
 ---
+
+The `onChange` prop is a callback function that is executed when a user selects a day in the calendar.
+It receives the selected date (`Date`) and can be used to update state or pass the date to other parts of your application.
+
+### Example
+
+```tsx lineNumbers
+import React, { useState } from "react";
+import Calendar from "react-evently-calendar";
+
+const App = () => {
+  const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+
+  return (
+    <div>
+      <Calendar onChange={(date) => setSelectedDate(date)} />
+      {selectedDate && (
+        <p>Selected date: {selectedDate.toLocaleDateString()}</p>
+      )}
+    </div>
+  );
+};
+
+export default App;
+```
+
+## ⚠️ Important
+
+If you are using the `renderDay` prop, make sure to read the **Important: Handling Day Selection** section on the [renderDay page](/en/docs/Customization/renderDay#%EF%B8%8F-important-handling-day-selection) for proper day selection handling.

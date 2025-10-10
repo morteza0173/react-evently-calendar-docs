@@ -1,22 +1,64 @@
 ---
-title: Class Names
+title: ClassNames Prop
 ---
 
-# Customizing Styles with `classNames`
+# Styling Customization with `classNames`
 
-You can override default CSS classes using the `classNames` prop:
+You can override the default CSS classes of the calendar using the `classNames` prop.
+You can view the default styles [here](https://github.com/morteza0173/react-evently-calendar/blob/main/src/components/Calendar/Calendar.css).
 
-| Key          | Description                                 |
-| ------------ | ------------------------------------------- |
-| `root`       | Main container                              |
-| `header`     | Calendar header                             |
-| `nav`        | Navigation container (month/year + buttons) |
-| `month`      | Month text                                  |
-| `year`       | Year text                                   |
-| `weekdays`   | Weekdays container                          |
-| `weekday`    | Each weekday label                          |
-| `days`       | Days container                              |
-| `day`        | Each day                                    |
-| `currentDay` | Highlight for today                         |
-| `lastMonth`  | Days from previous month                    |
-| `nextMonth`  | Days from next month                        |
+| Key          | Description                                       |
+| ------------ | ------------------------------------------------- |
+| `root`       | The main calendar container                       |
+| `header`     | The calendar header                               |
+| `nav`        | The navigation container (month/year and buttons) |
+| `month`      | The month text                                    |
+| `year`       | The year text                                     |
+| `weekdays`   | The weekdays container                            |
+| `weekday`    | Each weekday label                                |
+| `days`       | The days container                                |
+| `day`        | Each individual day                               |
+| `currentDay` | Highlight for the current day                     |
+| `lastMonth`  | Days from the previous month                      |
+| `nextMonth`  | Days from the next month                          |
+
+> **Note:** When overriding styles in **Tailwind CSS**, use the `!` prefix.
+> In regular CSS, use `!important` to ensure your styles take precedence.
+
+import CalendarClassNameProps from "@/components/CalendarClassNamesProps.tsx";
+
+<Tabs defaultValue="preview">
+  <TabsList>
+    <TabsTrigger value="preview">Preview</TabsTrigger>
+    <TabsTrigger value="code">Code Example</TabsTrigger>
+  </TabsList>
+
+{" "}
+
+<TabsContent value="preview">
+  For example, removing the background and borders of the weekday container, and
+  making the weekday text size responsive.
+  <CalendarClassNameProps />
+</TabsContent>
+
+  <TabsContent value="code">
+  ```tsx lineNumbers
+  "use client";
+
+import { Calendar as EventlyCalendar } from "react-evently-calendar";
+
+const Calendar = () => {
+return (
+
+<EventlyCalendar
+  classNames={{
+    weekdays: "!text-[0.6rem] md:!text-xs !border-0 !bg-transparent",
+    weekday: "!border-0",
+  }}
+/>
+); };
+
+export default Calendar;
+```
+
+</TabsContent> </Tabs>

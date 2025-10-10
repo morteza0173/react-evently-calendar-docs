@@ -1,4 +1,30 @@
 ---
-title: firstDayOfWeek 
+title: firstDayOfWeek Prop
 order: 4
 ---
+
+The `firstDayOfWeek` prop defines which day of the week should be considered the **first day** in your calendar.
+This prop is a number representing the days of the week from **0 to 6**, where:
+
+- `0` = Sunday
+- `1` = Monday
+- ...
+- `6` = Saturday
+
+### Example
+
+```tsx
+import React from "react";
+import Calendar from "react-evently-calendar";
+
+const App = () => {
+  return (
+    <div>
+      {/* Start the week on Saturday */}
+      <Calendar firstDayOfWeek={6} />
+    </div>
+  );
+};
+
+export default App;
+```

@@ -1,5 +1,27 @@
 ---
-title: calendarType
+title: Jalali & Right-to-Left
 order: 1
 ---
 
+Our calendar component supports both **Gregorian** and **Jalali (Persian)** calendars.
+You can switch the calendar type using the `CalendarType` prop.
+
+Additionally, using the `dir` prop, you can set the calendar's direction to **left-to-right (LTR)** or **right-to-left (RTL)**.
+This is especially useful for languages like Persian that are written RTL.
+
+### Props
+
+| Prop | Type | Description |
+|------|------|-------------|
+| `CalendarType` | `"gregorian"-"jalali"` | Specifies the calendar type. Default is `"gregorian"`. |
+| `dir` | `"ltr"-"rtl"` | Sets the calendar display direction. Default is `"ltr"`. |
+
+### Examples
+
+```tsx
+// Jalali calendar (RTL)
+<Calendar CalendarType="jalali" dir="rtl" />
+
+// Gregorian calendar (LTR)
+<Calendar CalendarType="gregorian" dir="ltr" />
+```
